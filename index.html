@@ -4,17 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaCartel - Premium E-commerce</title>
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Navigation -->
+
+<!-- HEADER -->
+<header>
     <nav class="navbar">
         <div class="logo">NovaCartel</div>
-        <ul class="nav-menu">
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
             <li><a href="#vehicles">Vehicles</a></li>
             <li><a href="#energy">Energy</a></li>
             <li><a href="#apparel">Apparel</a></li>
+
             <li class="discover">
                 <a href="#">Discover</a>
                 <div class="mega-menu">
@@ -24,12 +34,14 @@
                         <a href="#">Insurance</a>
                         <a href="#">Video Guides</a>
                     </div>
+
                     <div class="mega-col">
                         <h4>Locations</h4>
                         <a href="#">Kampala (HQ)</a>
                         <a href="#">Nairobi</a>
                         <a href="#">Kigali</a>
                     </div>
+
                     <div class="mega-col">
                         <h4>Company</h4>
                         <a href="#">About</a>
@@ -38,73 +50,119 @@
                     </div>
                 </div>
             </li>
-    <li><a href="#">Shop</a></li>
+
+            <li><a href="#">Shop</a></li>
             <li><button class="auth-btn" onclick="toggleAuthModal()">Sign In</button></li>
         </ul>
     </nav>
+</header>
 
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="auth-tabs">
-                <button class="tab-btn active" onclick="switchTab('sign-in')">Sign In</button>
-                <button class="tab-btn" onclick="switchTab('sign-up')">Sign Up</button>
-            </div>
-            
-            <div id="sign-in-tab" class="auth-tab active">
-                <button class="google-btn">Sign in with Google</button>
-                <div class="divider">OR</div>
-                <input type="email" placeholder="Email" class="auth-input">
-                <input type="password" placeholder="Password" class="auth-input">
-                <button class="cta-button">Sign In</button>
-                <a href="#" class="forgot-link">Forgot Password?</a>
-            </div>
-            
-            <div id="sign-up-tab" class="auth-tab">
-                <button class="google-btn">Sign up with Google</button>
-                <div class="divider">OR</div>
-                <input type="email" placeholder="Email" class="auth-input">
-                <input type="password" placeholder="Password" class="auth-input">
-                <input type="password" placeholder="Confirm Password" class="auth-input">
-                <button class="cta-button">Sign Up</button>
-            </div>
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay">
+    <div class="modal-content">
+
+        <!-- CLOSE BUTTON -->
+        <button class="close-btn" onclick="toggleAuthModal()">✕</button>
+
+        <div class="auth-tabs">
+            <button class="tab-btn active" onclick="switchTab('sign-in')">Sign In</button>
+            <button class="tab-btn" onclick="switchTab('sign-up')">Sign Up</button>
         </div>
-    </div>
 
-    <!-- Hero Visual -->
-    <main class="page-wrapper">
-        <section class="visual-stage">
-            <div class="hero-wrapper">
-                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200" id="hero-image" class="hero-image" alt="Hero Product">
-            </div>
+        <!-- SIGN IN -->
+        <div id="sign-in-tab" class="auth-tab active">
+            <button class="google-btn">Sign in with Google</button>
+            <div class="divider">OR</div>
+
+            <form id="sign-in-form">
+                <input type="email" placeholder="Email" class="auth-input" required aria-label="Email address">
+                <input type="password" placeholder="Password" class="auth-input" required minlength="6" aria-label="Password">
+                <button type="submit" class="cta-button">Sign In</button>
+            </form>
+
+            <a href="#" class="forgot-link">Forgot Password?</a>
+        </div>
+
+        <!-- SIGN UP -->
+        <div id="sign-up-tab" class="auth-tab">
+            <button class="google-btn">Sign up with Google</button>
+            <div class="divider">OR</div>
+
+            <form id="sign-up-form">
+                <input type="email" placeholder="Email" class="auth-input" required aria-label="Email address">
+                <input type="password" placeholder="Password" class="auth-input" required minlength="6" aria-label="Password">
+                <input type="password" placeholder="Confirm Password" class="auth-input" required minlength="6" aria-label="Confirm password">
+                
+                <button type="submit" class="cta-button">Create Account</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="page-wrapper">
+
+    <!-- HERO -->
+    <section class="visual-stage">
+        <div class="hero-wrapper">
+            <img 
+                src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200"
+                id="hero-image"
+                class="hero-image"
+                alt="Premium electric vehicle display"
+                loading="lazy"
+                width="1200"
+                height="600">
+        </div>
+    </section>
+
+    <!-- CONTENT SECTIONS -->
+    <div id="content-sections" class="content-sections">
+
+        <section id="vehicles">
+            <h2>Our Vehicles</h2>
         </section>
 
-        <!-- Dynamic Content -->
-        <div id="content-sections" class="content-sections">
-            <!-- Product grid will render here -->
-        </div>
+        <section id="energy">
+            <h2>Energy Solutions</h2>
+        </section>
 
-        <!-- Configurator Sidebar -->
-        <aside class="configurator-sidebar">
-            <div class="content-block">
-                <h1 class="configurator-title" id="config-title">Model S Plaid</h1>
-                <p class="tagline" id="config-specs">1020 hp | 1.99s 0-60 mph</p>
-                
-                <div class="selection-group">
-                    <h3>Select Color</h3>
-                    <div class="color-options" id="color-options"></div>
-                </div>
-                
-                <div class="selection-group">
-                    <h3>Wheels</h3>
-                    <div class="wheel-options" id="wheel-options"></div>
-                </div>
+        <section id="apparel">
+            <h2>Apparel Collection</h2>
+        </section>
 
-                <button class="cta-button" id="cta-button">Order Now</button>
+    </div>
+
+    <!-- CONFIGURATOR -->
+    <aside class="configurator-sidebar">
+        <div class="content-block">
+            <h1 class="configurator-title" id="config-title">Model S Plaid</h1>
+            <p class="tagline" id="config-specs">1020 hp | 1.99s 0-60 mph</p>
+
+            <div class="selection-group">
+                <h3>Select Color</h3>
+                <div class="color-options" id="color-options"></div>
             </div>
-        </aside>
-    </main>
 
-    <script src="script.js"></script>
+            <div class="selection-group">
+                <h3>Wheels</h3>
+                <div class="wheel-options" id="wheel-options"></div>
+            </div>
+
+            <button class="cta-button" id="order-now-btn">Order Now</button>
+        </div>
+    </aside>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 NovaCartel. All rights reserved.</p>
+</footer>
+
+<!-- SCRIPT -->
+<script src="script.js" defer></script>
+
 </body>
 </html>
