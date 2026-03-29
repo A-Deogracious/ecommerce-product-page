@@ -3,108 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaCartel - Premium E-commerce</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>NovaCartel — Premium Automotive Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">NovaCartel</div>
-        <ul class="nav-menu">
-            <li><a href="#vehicles">Vehicles</a></li>
-            <li><a href="#energy">Energy</a></li>
-            <li><a href="#apparel">Apparel</a></li>
-            <li class="discover">
-                <a href="#">Discover</a>
-                <div class="mega-menu">
-                    <div class="mega-col">
-                        <h4>Resources</h4>
-                        <a href="#">Demo Drive</a>
-                        <a href="#">Insurance</a>
-                        <a href="#">Video Guides</a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>Locations</h4>
-                        <a href="#">Kampala (HQ)</a>
-                        <a href="#">Nairobi</a>
-                        <a href="#">Kigali</a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>Company</h4>
-                        <a href="#">About</a>
-                        <a href="#">Careers</a>
-                        <a href="#">Investors</a>
-                    </div>
-                </div>
-            </li>
-    <li><a href="#">Shop</a></li>
-            <li><button class="auth-btn" onclick="toggleAuthModal()">Sign In</button></li>
-        </ul>
-    </nav>
 
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="auth-tabs">
-                <button class="tab-btn active" onclick="switchTab('sign-in')">Sign In</button>
-                <button class="tab-btn" onclick="switchTab('sign-up')">Sign Up</button>
-            </div>
-            
-            <div id="sign-in-tab" class="auth-tab active">
-                <button class="google-btn">Sign in with Google</button>
-                <div class="divider">OR</div>
-                <input type="email" placeholder="Email" class="auth-input">
-                <input type="password" placeholder="Password" class="auth-input">
-                <button class="cta-button">Sign In</button>
-                <a href="#" class="forgot-link">Forgot Password?</a>
-            </div>
-            
-            <div id="sign-up-tab" class="auth-tab">
-                <button class="google-btn">Sign up with Google</button>
-                <div class="divider">OR</div>
-                <input type="email" placeholder="Email" class="auth-input">
-                <input type="password" placeholder="Password" class="auth-input">
-                <input type="password" placeholder="Confirm Password" class="auth-input">
-                <button class="cta-button">Sign Up</button>
-            </div>
+<div id="loader">
+  <div class="loader-logo">NOVACARTEL</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<div id="toast-container"></div>
+
+<div class="overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+<div class="drawer" id="cart-drawer">
+  <div class="drawer-header">
+    <h2>Your Cart <span id="cart-count-header" style="color:var(--gold);font-size:1rem;"></span></h2>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="drawer-body" id="cart-body"></div>
+  <div class="drawer-footer" id="cart-footer" style="display:none;">
+    <div class="cart-summary">
+      <div class="summary-row"><span>Subtotal</span><span id="s-subtotal">—</span></div>
+      <div class="summary-row"><span>VAT (18%)</span><span id="s-tax">—</span></div>
+      <div class="summary-row total"><span>Total</span><span id="s-total">—</span></div>
+    </div>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<div class="overlay" id="wl-overlay" onclick="closeWishlist()"></div>
+
+<div class="drawer" id="wl-drawer">
+  <div class="drawer-header">
+    <h2>Wishlist</h2>
+    <button class="close-btn" onclick="closeWishlist()">✕</button>
+  </div>
+  <div class="drawer-body" id="wl-body"></div>
+</div>
+
+<div class="modal-overlay" id="auth-modal" onclick="closeAuthOnBg(event)">
+  <div class="modal auth-modal">
+    <button class="modal-close" onclick="closeAuth()">✕</button>
+    <h2>Welcome</h2>
+    <p class="subtitle">Sign in to order, track and manage your vehicles</p>
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" onclick="switchAuthTab('signin')">Sign In</button>
+      <button class="auth-tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+    <div class="auth-panel active" id="signin-panel">
+      <button class="btn-google">🌐 Continue with Google</button>
+      <div class="divider">or</div>
+      <input type="email" class="form-input" id="si-email" placeholder="Email address">
+      <input type="password" class="form-input" id="si-password" placeholder="Password">
+      <button class="btn-primary" style="justify-content:center;" onclick="handleSignIn()">Sign In</button>
+      <a href="#" class="auth-forgot">Forgot your password?</a>
+    </div>
+    <div class="auth-panel" id="signup-panel">
+      <button class="btn-google">🌐 Continue with Google</button>
+      <div class="divider">or</div>
+      <input type="text" class="form-input" id="su-name" placeholder="Full Name">
+      <input type="email" class="form-input" id="su-email" placeholder="Email address">
+      <input type="tel" class="form-input" id="su-phone" placeholder="Phone (+256 / +254 / +250)">
+      <input type="password" class="form-input" id="su-pass" placeholder="Password (6+ chars, uppercase, @#$?)">
+      <input type="password" class="form-input" id="su-confirm" placeholder="Confirm Password">
+      <button class="btn-primary" style="justify-content:center;" onclick="handleSignUp()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="config-modal" onclick="closeConfigOnBg(event)">
+  <div class="modal config-modal">
+    <button class="modal-close" onclick="closeConfigurator()">✕</button>
+    <div class="config-layout">
+      <div class="config-img-side">
+        <img id="cfg-img" src="" alt="">
+        <div class="config-img-tag" id="cfg-tag" style="display:none;"></div>
+      </div>
+      <div class="config-panel">
+        <div class="config-brand" id="cfg-brand"></div>
+        <h2 class="config-name" id="cfg-name"></h2>
+        <div class="config-price-tag" id="cfg-price"></div>
+        <p class="config-specs-text" id="cfg-specs"></p>
+        <div class="config-divider"></div>
+
+        <div class="config-section" id="cfg-colors-wrap">
+          <h4>Color: <span id="cfg-color-name" style="color:var(--gold);font-weight:300;text-transform:none;letter-spacing:0;font-size:0.9rem;"></span></h4>
+          <div class="swatch-row" id="cfg-swatches"></div>
         </div>
+
+        <div class="config-section" id="cfg-options-wrap">
+          <h4 id="cfg-options-label">Options</h4>
+          <div class="options-row" id="cfg-options"></div>
+        </div>
+
+        <div class="config-section">
+          <h4>Quantity</h4>
+          <div class="qty-row">
+            <div class="qty-ctrl">
+              <button onclick="changeQty(-1)">−</button>
+              <span class="qty-val" id="cfg-qty">1</span>
+              <button onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="config-divider"></div>
+        <div class="config-line-total">Total: <span id="cfg-line-total"></span></div>
+
+        <div class="config-actions">
+          <button class="btn-secondary" onclick="addToCartFromConfig()">Add to Cart</button>
+          <button class="btn-primary" onclick="buyNowFromConfig()">Buy Now →</button>
+        </div>
+        <button class="wishlist-btn" id="cfg-wishlist-btn" onclick="toggleWishlistItem()">♡ Add to Wishlist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkout-modal" onclick="closeCheckoutOnBg(event)">
+  <div class="modal checkout-modal">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2>Checkout</h2>
+
+    <div class="checkout-summary" id="co-summary"></div>
+
+    <div class="payment-section">
+      <h3>Payment Method</h3>
+      <div class="payment-tabs">
+        <button class="pay-tab active" onclick="switchPayTab('card',this)">💳 Card</button>
+        <button class="pay-tab" onclick="switchPayTab('mtn',this)">🟡 MTN MoMo</button>
+        <button class="pay-tab" onclick="switchPayTab('airtel',this)">🔴 Airtel Money</button>
+        <button class="pay-tab" onclick="switchPayTab('mpesa',this)">🟢 M-Pesa</button>
+      </div>
+
+      <div class="pay-form active" id="pf-card">
+        <input type="text" class="form-input" id="card-name" placeholder="Cardholder Name">
+        <input type="text" class="form-input" id="card-num" placeholder="Card Number  **** **** **** ****" maxlength="19" oninput="formatCardNum(this)">
+        <div class="card-row">
+          <input type="text" class="form-input" id="card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+          <input type="text" class="form-input" id="card-cvv" placeholder="CVV" maxlength="3">
+        </div>
+      </div>
+
+      <div class="pay-form" id="pf-mtn">
+        <div class="pay-info">🇺🇬 <strong>MTN Uganda Mobile Money</strong><br>Enter your MTN number. You will receive a payment prompt on your phone within seconds.</div>
+        <input type="tel" class="form-input" id="mtn-phone" placeholder="+256 77X XXX XXX">
+      </div>
+
+      <div class="pay-form" id="pf-airtel">
+        <div class="pay-info">🇺🇬 <strong>Airtel Uganda Money</strong><br>Enter your Airtel number. A USSD payment prompt will be sent to your phone.</div>
+        <input type="tel" class="form-input" id="airtel-phone" placeholder="+256 70X XXX XXX">
+      </div>
+
+      <div class="pay-form" id="pf-mpesa">
+        <div class="pay-info">🇰🇪🇷🇼 <strong>M-Pesa (Safaricom Kenya / MTN Rwanda)</strong><br>Enter your Safaricom or Rwanda M-Pesa number. An STK push will be sent.</div>
+        <input type="tel" class="form-input" id="mpesa-phone" placeholder="+254 7XX XXX XXX  or  +250 7XX XXX XXX">
+      </div>
     </div>
 
-    <!-- Hero Visual -->
-    <main class="page-wrapper">
-        <section class="visual-stage">
-            <div class="hero-wrapper">
-                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200" id="hero-image" class="hero-image" alt="Hero Product">
-            </div>
-        </section>
+    <div class="checkout-totals">
+      <div class="total-row"><span>Subtotal</span><span id="co-subtotal">—</span></div>
+      <div class="total-row"><span>VAT (18%)</span><span id="co-vat">—</span></div>
+      <div class="total-row grand"><span>Total Due</span><span id="co-grand">—</span></div>
+    </div>
 
-        <!-- Dynamic Content -->
-        <div id="content-sections" class="content-sections">
-            <!-- Product grid will render here -->
+    <button class="btn-primary btn-pay" id="pay-btn" onclick="processPayment()">
+      <span id="pay-btn-label">Place Order</span>
+      <div class="btn-pay-loading" id="pay-loading" style="display:none;">
+        <div class="spinner"></div><span id="pay-status-text">Processing…</span>
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="success-modal">
+  <div class="modal success-modal">
+    <div class="success-checkmark">✓</div>
+    <h2>Order Confirmed!</h2>
+    <p>Your order has been placed successfully. You will receive updates via SMS and email.</p>
+    <div class="tracking-box">
+      <span class="tracking-label">Your Tracking ID</span>
+      <span class="tracking-id" id="tracking-id-display"></span>
+      <button class="copy-id-btn" onclick="copyTracking()">Copy ID</button>
+    </div>
+    <div class="delivery-est">
+      📦 Estimated Delivery: <span id="est-delivery-date"></span>
+    </div>
+    <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.5rem;">
+      📧 Confirmation sent to your email &nbsp;|&nbsp; 📱 SMS tracking updates enabled
+    </p>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeSuccess()">Continue Shopping</button>
+  </div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">NovaCartel</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="filterAndScroll('vehicles')">Vehicles</a></li>
+    <li><a href="#" onclick="filterAndScroll('kayoola')">Kayoola</a></li>
+    <li><a href="#" onclick="filterAndScroll('energy')">Energy</a></li>
+    <li><a href="#" onclick="filterAndScroll('merch')">Merch</a></li>
+    <li class="has-mega">
+      <a href="#">Discover ▾</a>
+      <div class="mega-menu">
+        <div class="mega-col">
+          <h4>Resources</h4>
+          <a href="#">Demo Drive</a>
+          <a href="#">Insurance</a>
+          <a href="#">Financing</a>
+          <a href="#">Video Guides</a>
         </div>
+        <div class="mega-col">
+          <h4>Locations</h4>
+          <a href="#">🇺🇬 Kampala (HQ)</a>
+          <a href="#">🇰🇪 Nairobi</a>
+          <a href="#">🇷🇼 Kigali</a>
+        </div>
+        <div class="mega-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Investors</a>
+          <a href="#">Press</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="nav-right">
+    <div class="currency-switcher">
+      <button class="cur-btn active" onclick="setCurrency('USD')">USD</button>
+      <button class="cur-btn" onclick="setCurrency('UGX')">UGX</button>
+      <button class="cur-btn" onclick="setCurrency('KES')">KES</button>
+    </div>
+    <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
+      ♡ <span class="badge" id="wl-badge" style="display:none;">0</span>
+    </button>
+    <button class="icon-btn" onclick="openCart()" title="Cart">
+      🛒 <span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+    <button class="btn-auth" onclick="openAuth()" id="auth-nav-btn">Sign In</button>
+  </div>
+</nav>
 
-        <!-- Configurator Sidebar -->
-        <aside class="configurator-sidebar">
-            <div class="content-block">
-                <h1 class="configurator-title" id="config-title">Model S Plaid</h1>
-                <p class="tagline" id="config-specs">1020 hp | 1.99s 0-60 mph</p>
-                
-                <div class="selection-group">
-                    <h3>Select Color</h3>
-                    <div class="color-options" id="color-options"></div>
-                </div>
-                
-                <div class="selection-group">
-                    <h3>Wheels</h3>
-                    <div class="wheel-options" id="wheel-options"></div>
-                </div>
+<section class="hero" id="hero-section">
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="hero-eyebrow">Featured</div>
+    <h1 class="hero-title" id="hero-title">—</h1>
+    <p class="hero-specs-text" id="hero-specs"></p>
+    <div class="hero-price" id="hero-price"></div>
+    <div class="hero-btns">
+      <button class="btn-primary" id="hero-order-btn" onclick="heroOrder()">Order Now</button>
+      <button class="btn-ghost" onclick="scrollToProducts()">Explore All →</button>
+    </div>
+  </div>
+  <div class="hero-dots" id="hero-dots"></div>
+</section>
 
-                <button class="cta-button" id="cta-button">Order Now</button>
-            </div>
-        </aside>
-    </main>
+<div class="brands-strip">
+  <div class="brands-track" id="brands-track"></div>
+</div>
 
-    <script src="script.js"></script>
+<div class="section-header">
+  <div class="section-eyebrow">Our Collection</div>
+  <h2 class="section-title" id="section-title">All Products</h2>
+</div>
+
+<div class="filter-section" id="filter-section">
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="setCategory('all',this)">All</button>
+    <button class="filter-btn" onclick="setCategory('vehicles',this)">Vehicles</button>
+    <button class="filter-btn" onclick="setCategory('kayoola',this)">Kayoola</button>
+    <button class="filter-btn" onclick="setCategory('energy',this)">Energy</button>
+    <button class="filter-btn" onclick="setCategory('merch',this)">Merch</button>
+    <div class="filter-divider"></div>
+    <div id="brand-filter-row" style="display:flex;gap:0.5rem;flex-wrap:wrap;"></div>
+    <select class="sort-select" onchange="sortProducts(this.value)">
+      <option value="default">Sort by</option>
+      <option value="price-asc">Price: Low → High</option>
+      <option value="price-desc">Price: High → Low</option>
+      <option value="name">Name A–Z</option>
+    </select>
+  </div>
+  <div class="results-count" id="results-count"></div>
+</div>
+
+<section class="products-section" id="products-section">
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:1rem;">NovaCartel</div>
+      <p>East Africa's premium automotive marketplace. Connecting you to the world's finest vehicles from Kampala, Nairobi, and Kigali.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Vehicles</h4>
+      <a href="#">Tesla</a><a href="#">Ferrari</a><a href="#">Toyota</a><a href="#">Mercedes</a><a href="#">Kayoola</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a><a href="#">Careers</a><a href="#">Investors</a><a href="#">Press</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Track Order</a><a href="#">Contact Us</a><a href="#">Returns</a><a href="#">FAQ</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 NovaCartel. All rights reserved.</span>
+    <div class="footer-locations">
+      <span>🇺🇬 Kampala</span><span>🇰🇪 Nairobi</span><span>🇷🇼 Kigali</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
