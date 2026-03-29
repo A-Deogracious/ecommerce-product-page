@@ -6,8 +6,13 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* CHANGE 1: Added smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth; /* Improves navigation experience when clicking links */
+}
+
 body {
-  background: #0f172a; /* NEW: dark premium background */
+  background: #0f172a;
   color: #fff;
   line-height: 1.6;
 }
@@ -25,21 +30,23 @@ body {
   transition: 0.3s;
 }
 
-/* NEW: scroll effect */
+/* CHANGE 2: Added subtle shadow for depth */
 .navbar.solid {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* Gives navbar elevation when scrolling */
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #38bdf8; /* NEW: accent color */
+  color: #38bdf8;
 }
 
+/* CHANGE 3: Slight spacing improvement */
 .nav-menu {
   display: flex;
-  gap: 20px;
+  gap: 24px; /* Increased from 20px for better spacing */
   list-style: none;
 }
 
@@ -49,7 +56,20 @@ body {
   transition: 0.3s;
 }
 
-/* NEW: hover effect */
+/* CHANGE 4: Added underline animation */
+.nav-menu a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #38bdf8;
+  transition: width 0.3s;
+}
+
+.nav-menu a:hover::after {
+  width: 100%; /* Smooth underline effect */
+}
+
 .nav-menu a:hover {
   color: #38bdf8;
 }
@@ -63,20 +83,26 @@ body {
   cursor: pointer;
 }
 
+/* CHANGE 5: Button hover improvement */
+.auth-btn:hover {
+  background: #0ea5e9; /* Slightly darker for interaction feedback */
+}
+
 /* HERO */
 .visual-stage {
   margin-top: 100px;
   text-align: center;
 }
 
+/* CHANGE 6: Added shadow for premium look */
 .hero-image {
   width: 90%;
   max-width: 1000px;
   border-radius: 20px;
   transition: transform 0.5s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Adds depth */
 }
 
-/* NEW: hover zoom */
 .hero-image:hover {
   transform: scale(1.03);
 }
@@ -88,16 +114,17 @@ body {
   justify-content: center;
 }
 
+/* CHANGE 7: Added border for subtle definition */
 .product-card {
   width: 300px;
-  background: #1e293b; /* NEW: card color */
+  background: #1e293b;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.05); /* Makes cards more defined */
 }
 
-/* NEW: hover elevation */
 .product-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
@@ -113,9 +140,11 @@ body {
   padding: 15px;
 }
 
+/* CHANGE 8: Added slight spacing */
 .price {
   color: #38bdf8;
   font-weight: bold;
+  margin-top: 5px; /* Improves readability */
 }
 
 /* CONFIGURATOR */
@@ -135,11 +164,16 @@ body {
   padding: 12px;
   margin-top: 10px;
   border: none;
-  background: linear-gradient(45deg, #38bdf8, #0ea5e9); /* NEW gradient */
+  background: linear-gradient(45deg, #38bdf8, #0ea5e9);
   color: #000;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+}
+
+/* CHANGE 9: Added hover animation */
+.cta-button:hover {
+  transform: translateY(-2px); /* Gives click feedback */
 }
 
 /* MODAL */
@@ -155,9 +189,16 @@ body {
   align-items: center;
 }
 
-/* NEW: active modal */
+/* CHANGE 10: Smooth modal appearance */
 .modal-overlay.active {
   display: flex;
+  animation: fadeIn 0.3s ease; /* Adds smooth transition */
+}
+
+/* NEW animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-content {
@@ -186,7 +227,11 @@ body {
   border-radius: 6px;
 }
 
-/* NEW: focus effect */
+/* CHANGE 11: Added transition */
+.auth-input {
+  transition: 0.2s;
+}
+
 .auth-input:focus {
   outline: 2px solid #38bdf8;
 }
@@ -197,6 +242,11 @@ body {
   margin-right: 5px;
   border: none;
   cursor: pointer;
+}
+
+/* CHANGE 12: Added hover feedback */
+.tab-btn:hover {
+  background: #334155;
 }
 
 .tab-btn.active {
@@ -217,7 +267,7 @@ footer {
   display: none;
 }
 
-/* NEW: mobile responsive */
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .nav-menu {
     position: absolute;
