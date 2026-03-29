@@ -1,458 +1,297 @@
-/* Tesla/NovaCartel Premium - Responsive, Inter, Object-fit */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-:root {
-  --dark: #171a20;
-  --gray: #393c41;
-  --light: #f4f4f4;
-  --gold: #D4AF37;
-  --white: #fff;
-}
-
+/* RESET + GLOBAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+/* CHANGE 1: Added smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth; /* Improves navigation experience when clicking links */
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: var(--dark);
-  color: var(--white);
-  overflow-x: hidden;
+  background: #0f172a;
+  color: #fff;
+  line-height: 1.6;
 }
 
-.page-wrapper {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Hero Visual - Sticky Left */
-.visual-stage {
-  flex: 1;
-}
-
-.hero-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero-image {
-  width: 90%;
-  height: 90%;
-  object-fit: cover;
-  transition: opacity 0.5s ease, transform 0.8s ease;
-}
-
-.hero-image:hover {
-  transform: scale(1.05);
-}
-
-/* Navigation */
+/* NAVBAR */
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(23, 26, 32, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 40px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+/* CHANGE 2: Added subtle shadow for depth */
+.navbar.solid {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* Gives navbar elevation when scrolling */
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--gold);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #38bdf8;
 }
 
+/* CHANGE 3: Slight spacing improvement */
 .nav-menu {
   display: flex;
+  gap: 24px; /* Increased from 20px for better spacing */
   list-style: none;
-  gap: 2rem;
 }
 
 .nav-menu a {
-  color: var(--white);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* CHANGE 4: Added underline animation */
+.nav-menu a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #38bdf8;
+  transition: width 0.3s;
+}
+
+.nav-menu a:hover::after {
+  width: 100%; /* Smooth underline effect */
 }
 
 .nav-menu a:hover {
-  color: var(--gold);
+  color: #38bdf8;
 }
 
-.discover .mega-menu {
-  position: absolute;
-  top: 100%;
-  background: var(--gray);
-  min-width: 300px;
-  padding: 1rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s;
-}
-
-.discover:hover .mega-menu {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mega-col {
-  margin-right: 2rem;
-}
-
-.mega-col h4 {
-  margin-bottom: 0.5rem;
-  color: var(--gold);
-}
-
-.mega-col a {
-  display: block;
-  padding: 0.25rem 0;
-  opacity: 0.8;
-  transition: opacity 0.3s;
-}
-
-.mega-col a:hover {
-  opacity: 1;
-}
-
-/* Content Sections */
-.content-sections {
-  flex: 1;
-  padding: 4rem 2rem;
-  max-width: 1200px;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-}
-
-.product-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
-}
-
-.product-section.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.product-card {
-  background: var(--gray);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.4s, box-shadow 0.4s;
+.auth-btn {
+  padding: 8px 16px;
+  border: none;
+  background: #38bdf8;
+  color: #000;
+  border-radius: 6px;
   cursor: pointer;
+}
+
+/* CHANGE 5: Button hover improvement */
+.auth-btn:hover {
+  background: #0ea5e9; /* Slightly darker for interaction feedback */
+}
+
+/* HERO */
+.visual-stage {
+  margin-top: 100px;
+  text-align: center;
+}
+
+/* CHANGE 6: Added shadow for premium look */
+.hero-image {
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 20px;
+  transition: transform 0.5s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Adds depth */
+}
+
+.hero-image:hover {
+  transform: scale(1.03);
+}
+
+/* PRODUCT GRID */
+.product-section {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* CHANGE 7: Added border for subtle definition */
+.product-card {
+  width: 300px;
+  background: #1e293b;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.05); /* Makes cards more defined */
 }
 
 .product-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .product-img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 15px;
 }
 
-.product-info h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-}
-
-.specs {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  margin-bottom: 0.75rem;
-}
-
-.source-brand {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-}
-
+/* CHANGE 8: Added slight spacing */
 .price {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--gold);
+  color: #38bdf8;
+  font-weight: bold;
+  margin-top: 5px; /* Improves readability */
 }
 
-/* Configurator - Right Sidebar */
+/* CONFIGURATOR */
 .configurator-sidebar {
-  flex: 0 0 380px;
-  background: linear-gradient(135deg, var(--dark), var(--gray));
-  padding: 4rem 2rem 2rem;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 300px;
+  background: #020617;
+  padding: 20px;
+  border-left: 1px solid #333;
 }
 
-.configurator-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-
-.tagline {
-  opacity: 0.8;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-
-.selection-group {
-  margin-bottom: 2.5rem;
-}
-
-.selection-group h3 {
-  margin-bottom: 1rem;
-  opacity: 0.9;
-}
-
-.color-options, .wheel-options {
-  display: flex;
-  gap: 1rem;
-}
-
-.color-dot, .wheel-dot {
-  width: 50px;
-  height: 50px;
-  border: 3px solid transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-size: cover;
-  background-position: center;
-}
-
-.color-dot.active, .wheel-dot.active {
-  border-color: var(--gold);
-  transform: scale(1.1);
-}
-
+/* BUTTON */
 .cta-button {
   width: 100%;
-  padding: 1.25rem 2rem;
-  background: linear-gradient(135deg, var(--gold), #d4b437);
-  color: var(--dark);
+  padding: 12px;
+  margin-top: 10px;
   border: none;
+  background: linear-gradient(45deg, #38bdf8, #0ea5e9);
+  color: #000;
   border-radius: 8px;
-  font-size: 1.1rem;
+  cursor: pointer;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(212,175,55,0.3);
-  margin-top: 1rem;
 }
 
+/* CHANGE 9: Added hover animation */
 .cta-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(212,175,55,0.4);
+  transform: translateY(-2px); /* Gives click feedback */
 }
 
-/* Auth Modal */
-.auth-btn {
-  background: var(--gold);
-  color: var(--dark);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.auth-btn:hover {
-  background: #d4b437;
-  transform: translateY(-1px);
-}
-
+/* MODAL */
 .modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.8);
   display: none;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
+  align-items: center;
 }
 
+/* CHANGE 10: Smooth modal appearance */
 .modal-overlay.active {
   display: flex;
+  animation: fadeIn 0.3s ease; /* Adds smooth transition */
+}
+
+/* NEW animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-content {
-  background: var(--gray);
+  background: #1e293b;
+  padding: 30px;
   border-radius: 12px;
-  padding: 2.5rem;
-  max-width: 400px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
+  width: 350px;
 }
 
-.auth-tabs {
-  display: flex;
-  border-bottom: 1px solid #555;
-  margin-bottom: 2rem;
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 1rem;
+/* CLOSE BUTTON */
+.close-btn {
+  float: right;
   background: none;
   border: none;
-  color: var(--light);
+  color: #fff;
+  font-size: 18px;
   cursor: pointer;
-  font-weight: 500;
-  transition: color 0.3s;
 }
 
-.tab-btn.active {
-  color: var(--gold);
-  border-bottom: 2px solid var(--gold);
-}
-
-.auth-tab {
-  display: none;
-}
-
-.auth-tab.active {
-  display: block;
-}
-
-.google-btn {
-  width: 100%;
-  padding: 1rem;
-  background: #4285f4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  transition: background 0.3s;
-}
-
-.google-btn:hover {
-  background: #3367d6;
-}
-
-.divider {
-  text-align: center;
-  margin: 1.5rem 0;
-  color: var(--light);
-  opacity: 0.6;
-  position: relative;
-}
-
-.divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--gray);
-}
-
-.divider::after {
-  content: 'OR';
-  background: var(--gray);
-  padding: 0 1rem;
-  color: var(--light);
-}
-
+/* INPUT */
 .auth-input {
   width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background: var(--dark);
-  border: 1px solid #555;
-  border-radius: 8px;
-  color: var(--white);
-  font-size: 1rem;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+}
+
+/* CHANGE 11: Added transition */
+.auth-input {
+  transition: 0.2s;
 }
 
 .auth-input:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+  outline: 2px solid #38bdf8;
 }
 
-.forgot-link {
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 0.9rem;
-  display: block;
+/* TABS */
+.tab-btn {
+  padding: 10px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* CHANGE 12: Added hover feedback */
+.tab-btn:hover {
+  background: #334155;
+}
+
+.tab-btn.active {
+  background: #38bdf8;
+  color: #000;
+}
+
+/* FOOTER */
+footer {
   text-align: center;
-  margin-top: 0.5rem;
+  padding: 20px;
+  margin-top: 50px;
+  background: #020617;
 }
 
-.cta-button {
-  font-weight: 700 !important;
+/* MOBILE */
+.menu-toggle {
+  display: none;
 }
 
-@media (max-width: 768px) {
-  .modal-content {
-    margin: 1rem;
-    padding: 2rem 1.5rem;
-  }
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .page-wrapper {
-    flex-direction: column;
-  }
-  .configurator-sidebar {
-    position: static;
-    height: auto;
-    order: 3;
-  }
-  .content-sections {
-    order: 2;
-  }
-}
-
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .nav-menu {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #020617;
+    flex-direction: column;
+    width: 200px;
     display: none;
   }
-  .product-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .hero-wrapper {
-    height: 60vh;
-  }
-}
 
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  .nav-menu.open {
+    display: flex;
+  }
 
-.product-section.animate {
-  animation: fadeInUp 0.8s ease forwards;
+  .menu-toggle {
+    display: block;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: white;
+  }
+
+  .configurator-sidebar {
+    display: none;
+  }
 }
