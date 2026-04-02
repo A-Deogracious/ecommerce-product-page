@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaCartel — Premium Automotive Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaCartel — Premium Automotive Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- ===== LOADER ===== -->
 <div id="loader">
   <div class="loader-logo">NOVACARTEL</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
+<!-- ===== TOAST CONTAINER ===== -->
 <div id="toast-container"></div>
 
+<!-- ===== CART OVERLAY & DRAWER ===== -->
 <div class="overlay" id="cart-overlay" onclick="closeCart()"></div>
-
 <div class="drawer" id="cart-drawer">
   <div class="drawer-header">
     <h2>Your Cart <span id="cart-count-header" style="color:var(--gold);font-size:1rem;"></span></h2>
@@ -35,8 +37,8 @@
   </div>
 </div>
 
+<!-- ===== WISHLIST OVERLAY & DRAWER ===== -->
 <div class="overlay" id="wl-overlay" onclick="closeWishlist()"></div>
-
 <div class="drawer" id="wl-drawer">
   <div class="drawer-header">
     <h2>Wishlist</h2>
@@ -45,6 +47,7 @@
   <div class="drawer-body" id="wl-body"></div>
 </div>
 
+<!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="auth-modal" onclick="closeAuthOnBg(event)">
   <div class="modal auth-modal">
     <button class="modal-close" onclick="closeAuth()">✕</button>
@@ -75,6 +78,7 @@
   </div>
 </div>
 
+<!-- ===== CONFIGURATOR MODAL ===== -->
 <div class="modal-overlay" id="config-modal" onclick="closeConfigOnBg(event)">
   <div class="modal config-modal">
     <button class="modal-close" onclick="closeConfigurator()">✕</button>
@@ -124,6 +128,7 @@
   </div>
 </div>
 
+<!-- ===== CHECKOUT MODAL ===== -->
 <div class="modal-overlay" id="checkout-modal" onclick="closeCheckoutOnBg(event)">
   <div class="modal checkout-modal">
     <button class="modal-close" onclick="closeCheckout()">✕</button>
@@ -140,25 +145,29 @@
         <button class="pay-tab" onclick="switchPayTab('mpesa',this)">🟢 M-Pesa</button>
       </div>
 
+      <!-- Card Form -->
       <div class="pay-form active" id="pf-card">
         <input type="text" class="form-input" id="card-name" placeholder="Cardholder Name">
-        <input type="text" class="form-input" id="card-num" placeholder="Card Number  **** **** **** ****" maxlength="19" oninput="formatCardNum(this)">
+        <input type="text" class="form-input" id="card-num" placeholder="Card Number  ****  ****  ****  ****" maxlength="19" oninput="formatCardNum(this)">
         <div class="card-row">
           <input type="text" class="form-input" id="card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
           <input type="text" class="form-input" id="card-cvv" placeholder="CVV" maxlength="3">
         </div>
       </div>
 
+      <!-- MTN Form -->
       <div class="pay-form" id="pf-mtn">
         <div class="pay-info">🇺🇬 <strong>MTN Uganda Mobile Money</strong><br>Enter your MTN number. You will receive a payment prompt on your phone within seconds.</div>
         <input type="tel" class="form-input" id="mtn-phone" placeholder="+256 77X XXX XXX">
       </div>
 
+      <!-- Airtel Form -->
       <div class="pay-form" id="pf-airtel">
         <div class="pay-info">🇺🇬 <strong>Airtel Uganda Money</strong><br>Enter your Airtel number. A USSD payment prompt will be sent to your phone.</div>
         <input type="tel" class="form-input" id="airtel-phone" placeholder="+256 70X XXX XXX">
       </div>
 
+      <!-- M-Pesa Form -->
       <div class="pay-form" id="pf-mpesa">
         <div class="pay-info">🇰🇪🇷🇼 <strong>M-Pesa (Safaricom Kenya / MTN Rwanda)</strong><br>Enter your Safaricom or Rwanda M-Pesa number. An STK push will be sent.</div>
         <input type="tel" class="form-input" id="mpesa-phone" placeholder="+254 7XX XXX XXX  or  +250 7XX XXX XXX">
@@ -180,6 +189,7 @@
   </div>
 </div>
 
+<!-- ===== ORDER SUCCESS MODAL ===== -->
 <div class="modal-overlay" id="success-modal">
   <div class="modal success-modal">
     <div class="success-checkmark">✓</div>
@@ -200,11 +210,12 @@
   </div>
 </div>
 
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
   <div class="nav-logo">NovaCartel</div>
+
   <ul class="nav-links">
     <li><a href="#" onclick="filterAndScroll('vehicles')">Vehicles</a></li>
-    <li><a href="#" onclick="filterAndScroll('kayoola')">Kayoola</a></li>
     <li><a href="#" onclick="filterAndScroll('energy')">Energy</a></li>
     <li><a href="#" onclick="filterAndScroll('merch')">Merch</a></li>
     <li class="has-mega">
@@ -233,6 +244,7 @@
       </div>
     </li>
   </ul>
+
   <div class="nav-right">
     <div class="currency-switcher">
       <button class="cur-btn active" onclick="setCurrency('USD')">USD</button>
@@ -249,6 +261,7 @@
   </div>
 </nav>
 
+<!-- ===== HERO ===== -->
 <section class="hero" id="hero-section">
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-content">
@@ -264,20 +277,22 @@
   <div class="hero-dots" id="hero-dots"></div>
 </section>
 
+<!-- ===== BRANDS SCROLLING STRIP ===== -->
 <div class="brands-strip">
   <div class="brands-track" id="brands-track"></div>
 </div>
 
+<!-- ===== SECTION HEADER ===== -->
 <div class="section-header">
   <div class="section-eyebrow">Our Collection</div>
   <h2 class="section-title" id="section-title">All Products</h2>
 </div>
 
+<!-- ===== FILTER BAR ===== -->
 <div class="filter-section" id="filter-section">
   <div class="filter-row">
     <button class="filter-btn active" onclick="setCategory('all',this)">All</button>
     <button class="filter-btn" onclick="setCategory('vehicles',this)">Vehicles</button>
-    <button class="filter-btn" onclick="setCategory('kayoola',this)">Kayoola</button>
     <button class="filter-btn" onclick="setCategory('energy',this)">Energy</button>
     <button class="filter-btn" onclick="setCategory('merch',this)">Merch</button>
     <div class="filter-divider"></div>
@@ -292,10 +307,12 @@
   <div class="results-count" id="results-count"></div>
 </div>
 
+<!-- ===== PRODUCTS GRID ===== -->
 <section class="products-section" id="products-section">
   <div class="product-grid" id="product-grid"></div>
 </section>
 
+<!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -304,21 +321,33 @@
     </div>
     <div class="footer-col">
       <h4>Vehicles</h4>
-      <a href="#">Tesla</a><a href="#">Ferrari</a><a href="#">Toyota</a><a href="#">Mercedes</a><a href="#">Kayoola</a>
+      <a href="#">Tesla</a>
+      <a href="#">Ferrari</a>
+      <a href="#">Toyota</a>
+      <a href="#">Mercedes</a>
+      <a href="#">Kiira Motors</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="#">About Us</a><a href="#">Careers</a><a href="#">Investors</a><a href="#">Press</a>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Investors</a>
+      <a href="#">Press</a>
     </div>
     <div class="footer-col">
       <h4>Support</h4>
-      <a href="#">Track Order</a><a href="#">Contact Us</a><a href="#">Returns</a><a href="#">FAQ</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Returns</a>
+      <a href="#">FAQ</a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 NovaCartel. All rights reserved.</span>
     <div class="footer-locations">
-      <span>🇺🇬 Kampala</span><span>🇰🇪 Nairobi</span><span>🇷🇼 Kigali</span>
+      <span>🇺🇬 Kampala</span>
+      <span>🇰🇪 Nairobi</span>
+      <span>🇷🇼 Kigali</span>
     </div>
   </div>
 </footer>
