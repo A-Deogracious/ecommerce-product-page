@@ -6,86 +6,87 @@
   <title>NovaCartel — Premium Automotive Marketplace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 
 <!-- ===== LOADER ===== -->
-<div id="loader">
-  <div class="loader-logo">NOVACARTEL</div>
+<div id="loader" aria-hidden="true">
+  <div class="loader-logo">WELCOME TO NOVACARTEL</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
 <!-- ===== TOAST CONTAINER ===== -->
-<div id="toast-container"></div>
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
 <!-- ===== CART OVERLAY & DRAWER ===== -->
 <div class="overlay" id="cart-overlay" onclick="closeCart()"></div>
-<div class="drawer" id="cart-drawer">
+<div class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
   <div class="drawer-header">
-    <h2>Your Cart <span id="cart-count-header" style="color:var(--gold);font-size:1rem;"></span></h2>
-    <button class="close-btn" onclick="closeCart()">✕</button>
+    <h2 id="cart-title">Your Cart <span id="cart-count-header" class="cart-count-label"></span></h2>
+    <button class="close-btn" onclick="closeCart()" aria-label="Close cart">✕</button>
   </div>
   <div class="drawer-body" id="cart-body"></div>
-  <div class="drawer-footer" id="cart-footer" style="display:none;">
+  <div class="drawer-footer hidden" id="cart-footer">
     <div class="cart-summary">
       <div class="summary-row"><span>Subtotal</span><span id="s-subtotal">—</span></div>
       <div class="summary-row"><span>VAT (18%)</span><span id="s-tax">—</span></div>
       <div class="summary-row total"><span>Total</span><span id="s-total">—</span></div>
     </div>
-    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="openCheckout()">Proceed to Checkout →</button>
+    <button class="btn-primary btn-full" onclick="openCheckout()">Proceed to Checkout →</button>
   </div>
 </div>
 
 <!-- ===== WISHLIST OVERLAY & DRAWER ===== -->
 <div class="overlay" id="wl-overlay" onclick="closeWishlist()"></div>
-<div class="drawer" id="wl-drawer">
+<div class="drawer" id="wl-drawer" role="dialog" aria-modal="true" aria-labelledby="wl-title">
   <div class="drawer-header">
-    <h2>Wishlist</h2>
-    <button class="close-btn" onclick="closeWishlist()">✕</button>
+    <h2 id="wl-title">Wishlist</h2>
+    <button class="close-btn" onclick="closeWishlist()" aria-label="Close wishlist">✕</button>
   </div>
   <div class="drawer-body" id="wl-body"></div>
 </div>
 
 <!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="auth-modal" onclick="closeAuthOnBg(event)">
-  <div class="modal auth-modal">
-    <button class="modal-close" onclick="closeAuth()">✕</button>
-    <h2>Welcome</h2>
+  <div class="modal auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <button class="modal-close" onclick="closeAuth()" aria-label="Close authentication modal">✕</button>
+    <h2 id="auth-title">Welcome</h2>
     <p class="subtitle">Sign in to order, track and manage your vehicles</p>
     <div class="auth-tabs">
-      <button class="auth-tab-btn active" onclick="switchAuthTab('signin')">Sign In</button>
-      <button class="auth-tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+      <button class="auth-tab-btn active" onclick="switchAuthTab('signin')" type="button">Sign In</button>
+      <button class="auth-tab-btn" onclick="switchAuthTab('signup')" type="button">Sign Up</button>
     </div>
     <div class="auth-panel active" id="signin-panel">
-      <button class="btn-google">🌐 Continue with Google</button>
+      <button class="btn-google" type="button">🌐 Continue with Google</button>
       <div class="divider">or</div>
-      <input type="email" class="form-input" id="si-email" placeholder="Email address">
-      <input type="password" class="form-input" id="si-password" placeholder="Password">
-      <button class="btn-primary" style="justify-content:center;" onclick="handleSignIn()">Sign In</button>
+      <input type="email" class="form-input" id="si-email" placeholder="Email address" autocomplete="email">
+      <input type="password" class="form-input" id="si-password" placeholder="Password" autocomplete="current-password">
+      <button class="btn-primary btn-full" onclick="handleSignIn()" type="button">Sign In</button>
       <a href="#" class="auth-forgot">Forgot your password?</a>
     </div>
     <div class="auth-panel" id="signup-panel">
-      <button class="btn-google">🌐 Continue with Google</button>
+      <button class="btn-google" type="button">🌐 Continue with Google</button>
       <div class="divider">or</div>
-      <input type="text" class="form-input" id="su-name" placeholder="Full Name">
-      <input type="email" class="form-input" id="su-email" placeholder="Email address">
-      <input type="tel" class="form-input" id="su-phone" placeholder="Phone (+256 / +254 / +250)">
-      <input type="password" class="form-input" id="su-pass" placeholder="Password (6+ chars, uppercase, @#$?)">
-      <input type="password" class="form-input" id="su-confirm" placeholder="Confirm Password">
-      <button class="btn-primary" style="justify-content:center;" onclick="handleSignUp()">Create Account</button>
+      <input type="text" class="form-input" id="su-name" placeholder="Full Name" autocomplete="name">
+      <input type="email" class="form-input" id="su-email" placeholder="Email address" autocomplete="email">
+      <input type="tel" class="form-input" id="su-phone" placeholder="Phone (+256 / +254 / +250)" autocomplete="tel">
+      <input type="password" class="form-input" id="su-pass" placeholder="Password (6+ chars, uppercase, @#$?)" autocomplete="new-password">
+      <input type="password" class="form-input" id="su-confirm" placeholder="Confirm Password" autocomplete="new-password">
+      <button class="btn-primary btn-full" onclick="handleSignUp()" type="button">Create Account</button>
     </div>
   </div>
 </div>
 
 <!-- ===== CONFIGURATOR MODAL ===== -->
 <div class="modal-overlay" id="config-modal" onclick="closeConfigOnBg(event)">
-  <div class="modal config-modal">
-    <button class="modal-close" onclick="closeConfigurator()">✕</button>
+  <div class="modal config-modal" role="dialog" aria-modal="true" aria-labelledby="cfg-name">
+    <button class="modal-close" onclick="closeConfigurator()" aria-label="Close configurator">✕</button>
     <div class="config-layout">
       <div class="config-img-side">
-        <img id="cfg-img" src="" alt="">
-        <div class="config-img-tag" id="cfg-tag" style="display:none;"></div>
+        <img id="cfg-img" src="" alt="Selected vehicle configuration preview">
+        <div class="config-img-tag" id="cfg-tag"></div>
       </div>
       <div class="config-panel">
         <div class="config-brand" id="cfg-brand"></div>
@@ -95,7 +96,7 @@
         <div class="config-divider"></div>
 
         <div class="config-section" id="cfg-colors-wrap">
-          <h4>Color: <span id="cfg-color-name" style="color:var(--gold);font-weight:300;text-transform:none;letter-spacing:0;font-size:0.9rem;"></span></h4>
+          <h4>Color: <span id="cfg-color-name" class="cfg-color-name"></span></h4>
           <div class="swatch-row" id="cfg-swatches"></div>
         </div>
 
@@ -108,9 +109,9 @@
           <h4>Quantity</h4>
           <div class="qty-row">
             <div class="qty-ctrl">
-              <button onclick="changeQty(-1)">−</button>
+              <button onclick="changeQty(-1)" type="button">−</button>
               <span class="qty-val" id="cfg-qty">1</span>
-              <button onclick="changeQty(1)">+</button>
+              <button onclick="changeQty(1)" type="button">+</button>
             </div>
           </div>
         </div>
@@ -119,10 +120,10 @@
         <div class="config-line-total">Total: <span id="cfg-line-total"></span></div>
 
         <div class="config-actions">
-          <button class="btn-secondary" onclick="addToCartFromConfig()">Add to Cart</button>
-          <button class="btn-primary" onclick="buyNowFromConfig()">Buy Now →</button>
+          <button class="btn-secondary" onclick="addToCartFromConfig()" type="button">Add to Cart</button>
+          <button class="btn-primary" onclick="buyNowFromConfig()" type="button">Buy Now →</button>
         </div>
-        <button class="wishlist-btn" id="cfg-wishlist-btn" onclick="toggleWishlistItem()">♡ Add to Wishlist</button>
+        <button class="wishlist-btn" id="cfg-wishlist-btn" onclick="toggleWishlistItem()" type="button">♡ Add to Wishlist</button>
       </div>
     </div>
   </div>
@@ -130,28 +131,28 @@
 
 <!-- ===== CHECKOUT MODAL ===== -->
 <div class="modal-overlay" id="checkout-modal" onclick="closeCheckoutOnBg(event)">
-  <div class="modal checkout-modal">
-    <button class="modal-close" onclick="closeCheckout()">✕</button>
-    <h2>Checkout</h2>
+  <div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <button class="modal-close" onclick="closeCheckout()" aria-label="Close checkout">✕</button>
+    <h2 id="checkout-title">Checkout</h2>
 
     <div class="checkout-summary" id="co-summary"></div>
 
     <div class="payment-section">
       <h3>Payment Method</h3>
       <div class="payment-tabs">
-        <button class="pay-tab active" onclick="switchPayTab('card',this)">💳 Card</button>
-        <button class="pay-tab" onclick="switchPayTab('mtn',this)">🟡 MTN MoMo</button>
-        <button class="pay-tab" onclick="switchPayTab('airtel',this)">🔴 Airtel Money</button>
-        <button class="pay-tab" onclick="switchPayTab('mpesa',this)">🟢 M-Pesa</button>
+        <button class="pay-tab active" onclick="switchPayTab('card',this)" type="button">💳 Card</button>
+        <button class="pay-tab" onclick="switchPayTab('mtn',this)" type="button">🟡 MTN MoMo</button>
+        <button class="pay-tab" onclick="switchPayTab('airtel',this)" type="button">🔴 Airtel Money</button>
+        <button class="pay-tab" onclick="switchPayTab('mpesa',this)" type="button">🟢 M-Pesa</button>
       </div>
 
       <!-- Card Form -->
       <div class="pay-form active" id="pf-card">
-        <input type="text" class="form-input" id="card-name" placeholder="Cardholder Name">
-        <input type="text" class="form-input" id="card-num" placeholder="Card Number  ****  ****  ****  ****" maxlength="19" oninput="formatCardNum(this)">
+        <input type="text" class="form-input" id="card-name" placeholder="Cardholder Name" autocomplete="cc-name">
+        <input type="text" class="form-input" id="card-num" placeholder="Card Number  ****  ****  ****  ****" maxlength="19" oninput="formatCardNum(this)" autocomplete="cc-number">
         <div class="card-row">
-          <input type="text" class="form-input" id="card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
-          <input type="text" class="form-input" id="card-cvv" placeholder="CVV" maxlength="3">
+          <input type="text" class="form-input" id="card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" autocomplete="cc-exp">
+          <input type="text" class="form-input" id="card-cvv" placeholder="CVV" maxlength="3" autocomplete="cc-csc">
         </div>
       </div>
 
@@ -180,9 +181,9 @@
       <div class="total-row grand"><span>Total Due</span><span id="co-grand">—</span></div>
     </div>
 
-    <button class="btn-primary btn-pay" id="pay-btn" onclick="processPayment()">
+    <button class="btn-primary btn-pay" id="pay-btn" onclick="processPayment()" type="button">
       <span id="pay-btn-label">Place Order</span>
-      <div class="btn-pay-loading" id="pay-loading" style="display:none;">
+      <div class="btn-pay-loading" id="pay-loading">
         <div class="spinner"></div><span id="pay-status-text">Processing…</span>
       </div>
     </button>
@@ -191,22 +192,22 @@
 
 <!-- ===== ORDER SUCCESS MODAL ===== -->
 <div class="modal-overlay" id="success-modal">
-  <div class="modal success-modal">
-    <div class="success-checkmark">✓</div>
-    <h2>Order Confirmed!</h2>
+  <div class="modal success-modal" role="dialog" aria-modal="true" aria-labelledby="success-title">
+    <div class="success-checkmark" aria-hidden="true">✓</div>
+    <h2 id="success-title">Order Confirmed!</h2>
     <p>Your order has been placed successfully. You will receive updates via SMS and email.</p>
     <div class="tracking-box">
       <span class="tracking-label">Your Tracking ID</span>
       <span class="tracking-id" id="tracking-id-display"></span>
-      <button class="copy-id-btn" onclick="copyTracking()">Copy ID</button>
+      <button class="copy-id-btn" onclick="copyTracking()" type="button">Copy ID</button>
     </div>
     <div class="delivery-est">
       📦 Estimated Delivery: <span id="est-delivery-date"></span>
     </div>
-    <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.5rem;">
+    <p class="success-subtext">
       📧 Confirmation sent to your email &nbsp;|&nbsp; 📱 SMS tracking updates enabled
     </p>
-    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeSuccess()">Continue Shopping</button>
+    <button class="btn-primary btn-full" onclick="closeSuccess()" type="button">Continue Shopping</button>
   </div>
 </div>
 
@@ -214,11 +215,16 @@
 <nav class="navbar" id="navbar">
   <div class="nav-logo">NovaCartel</div>
 
-  <ul class="nav-links">
+  <button class="icon-btn nav-toggle" id="nav-toggle" onclick="toggleNavMenu()" aria-label="Toggle navigation">
+    ☰
+  </button>
+
+  <ul class="nav-links closed">
     <li><a href="#" onclick="filterAndScroll('vehicles')">Vehicles</a></li>
     <li><a href="#" onclick="filterAndScroll('energy')">Energy</a></li>
     <li><a href="#" onclick="filterAndScroll('merch')">Merch</a></li>
     <li class="has-mega">
+        <!--
       <a href="#">Discover ▾</a>
       <div class="mega-menu">
         <div class="mega-col">
@@ -244,41 +250,41 @@
       </div>
     </li>
   </ul>
-
+-->
   <div class="nav-right">
     <div class="currency-switcher">
-      <button class="cur-btn active" onclick="setCurrency('USD')">USD</button>
-      <button class="cur-btn" onclick="setCurrency('UGX')">UGX</button>
-      <button class="cur-btn" onclick="setCurrency('KES')">KES</button>
+      <button class="cur-btn active" onclick="setCurrency('USD')" type="button">USD</button>
+      <button class="cur-btn" onclick="setCurrency('UGX')" type="button">UGX</button>
+      <button class="cur-btn" onclick="setCurrency('KES')" type="button">KES</button>
     </div>
-    <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
-      ♡ <span class="badge" id="wl-badge" style="display:none;">0</span>
+    <button class="icon-btn" onclick="openWishlist()" title="Wishlist" aria-label="Open wishlist" type="button">
+      ♡ <span class="badge hidden" id="wl-badge">0</span>
     </button>
-    <button class="icon-btn" onclick="openCart()" title="Cart">
-      🛒 <span class="badge" id="cart-badge" style="display:none;">0</span>
+    <button class="icon-btn" onclick="openCart()" title="Cart" aria-label="Open cart" type="button">
+      🛒 <span class="badge hidden" id="cart-badge">0</span>
     </button>
-    <button class="btn-auth" onclick="openAuth()" id="auth-nav-btn">Sign In</button>
+    <button class="btn-auth" onclick="openAuth()" id="auth-nav-btn" type="button">Sign In</button>
   </div>
 </nav>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="hero-section">
-  <div class="hero-bg" id="hero-bg"></div>
+<section class="hero" id="hero-section" aria-label="Featured vehicles">
+  <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-eyebrow" id="hero-eyebrow">Featured</div>
     <h1 class="hero-title" id="hero-title">—</h1>
     <p class="hero-specs-text" id="hero-specs"></p>
     <div class="hero-price" id="hero-price"></div>
     <div class="hero-btns">
-      <button class="btn-primary" id="hero-order-btn" onclick="heroOrder()">Order Now</button>
-      <button class="btn-ghost" onclick="scrollToProducts()">Explore All →</button>
+      <button class="btn-primary" id="hero-order-btn" onclick="heroOrder()" type="button">Order Now</button>
+      <button class="btn-ghost" onclick="scrollToProducts()" type="button">Explore All →</button>
     </div>
   </div>
-  <div class="hero-dots" id="hero-dots"></div>
+  <div class="hero-dots" id="hero-dots" aria-hidden="true"></div>
 </section>
 
 <!-- ===== BRANDS SCROLLING STRIP ===== -->
-<div class="brands-strip">
+<div class="brands-strip" aria-label="Featured brands">
   <div class="brands-track" id="brands-track"></div>
 </div>
 
@@ -291,12 +297,12 @@
 <!-- ===== FILTER BAR ===== -->
 <div class="filter-section" id="filter-section">
   <div class="filter-row">
-    <button class="filter-btn active" onclick="setCategory('all',this)">All</button>
-    <button class="filter-btn" onclick="setCategory('vehicles',this)">Vehicles</button>
-    <button class="filter-btn" onclick="setCategory('energy',this)">Energy</button>
-    <button class="filter-btn" onclick="setCategory('merch',this)">Merch</button>
+    <button class="filter-btn active" onclick="setCategory('all',this)" type="button">All</button>
+    <button class="filter-btn" onclick="setCategory('vehicles',this)" type="button">Vehicles</button>
+    <button class="filter-btn" onclick="setCategory('energy',this)" type="button">Energy</button>
+    <button class="filter-btn" onclick="setCategory('merch',this)" type="button">Merch</button>
     <div class="filter-divider"></div>
-    <div id="brand-filter-row" style="display:flex;gap:0.5rem;flex-wrap:wrap;"></div>
+    <div id="brand-filter-row" class="brand-filter-row"></div>
     <select class="sort-select" onchange="sortProducts(this.value)">
       <option value="default">Sort by</option>
       <option value="price-asc">Price: Low → High</option>
@@ -312,12 +318,95 @@
   <div class="product-grid" id="product-grid"></div>
 </section>
 
+<!-- Company sections -->
+<section id="about" class="info-section">
+  <h2>About NovaCartel</h2>
+  <p>
+    NovaCartel is an East African automotive and mobility marketplace connecting serious buyers with trusted dealers, manufacturers, and curated lifestyle brands across Kampala, Nairobi, and Kigali.
+  </p>
+  <p>
+    We focus on verified vehicles, transparent pricing, and digital‑first experiences so customers can research, configure, and secure their next vehicle or mobility solution with confidence.
+  </p>
+</section>
+
+<section id="careers" class="info-section">
+  <h2>Careers</h2>
+  <p>
+    We are building the next generation of automotive commerce in East Africa and are always interested in driven people who care about technology, data, and customer experience.
+  </p>
+  <p>
+    If you are a student or professional in engineering, design, data, or operations and would like to explore roles or internships, send a short CV and portfolio link to careers@novacartel.africa.
+  </p>
+</section>
+
+<section id="investors" class="info-section">
+  <h2>Investors</h2>
+  <p>
+    NovaCartel operates at the intersection of mobility, fintech, and logistics in one of the fastest‑growing regions in the world.
+  </p>
+  <p>
+    For investor materials and partnership discussions, please contact our team at investors@novacartel.africa and we will share our latest deck, metrics, and roadmap under NDA.
+  </p>
+</section>
+
+<section id="press" class="info-section">
+  <h2>Press & Media</h2>
+  <p>
+    We are available for interviews, expert commentary, and features related to automotive trends, electric mobility, and digital commerce in East Africa.
+  </p>
+  <p>
+    For press enquiries, please email press@novacartel.africa with your publication, deadline, and angle, and our communications team will respond promptly.
+  </p>
+</section>
+
+<section id="track-order" class="info-section">
+  <h2>Track Your Order</h2>
+  <p>
+    After completing a purchase, you receive a unique Tracking ID on the confirmation screen and via email/SMS.
+  </p>
+  <p>
+    Use that Tracking ID on this site or share it with our support team to view the latest status, inspection updates, and estimated delivery window for your vehicle or merch.
+  </p>
+</section>
+
+<section id="contact" class="info-section">
+  <h2>Contact Us</h2>
+  <p>Email: support@novacartel.africa</p>
+  <p>Phone (Uganda): +256 701251912</p>
+  <p>Offices: Kampala • Nairobi • Kigali</p>
+  <p>
+    Our support hours are Monday–Friday, 9:00–18:00 EAT. Outside these hours you can still email us and we will respond on the next business day.
+  </p>
+</section>
+
+<section id="returns" class="info-section">
+  <h2>Returns & Cancellations</h2>
+  <p>
+    For vehicles, cancellations and changes are handled case‑by‑case before shipment or registration, in line with dealer and financing agreements.
+  </p>
+  <p>
+    For merchandise, you may request an exchange or return within 7 days of delivery if items are unused, in original packaging, and accompanied by proof of purchase.
+  </p>
+</section>
+
+<section id="faq" class="info-section">
+  <h2>Frequently Asked Questions</h2>
+  <p><strong>How do I reserve a vehicle?</strong><br>
+  Configure your vehicle, add it to cart, and complete checkout with a supported payment method. Our team will then contact you to confirm paperwork and delivery.</p>
+
+  <p><strong>Which payment methods do you support?</strong><br>
+  We currently support cards (Visa/Mastercard) and mobile money options including MTN MoMo, Airtel Money, and M‑Pesa.</p>
+
+  <p><strong>Do you handle registration and insurance?</strong><br>
+  Yes. For most markets we can assist with registration, number plates, and recommended insurance partners as part of the handover process.</p>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="nav-logo" style="margin-bottom:1rem;">NovaCartel</div>
-      <p>East Africa's premium automotive marketplace. Connecting you to the world's finest vehicles from Kampala, Nairobi, and Kigali.</p>
+      <div class="nav-logo footer-logo">NovaCartel</div>
+      <p>East Africa’s premier automotive marketplace, connecting discerning buyers in Kampala, Nairobi, and Kigali with trusted dealers and world‑class vehicles..</p>
     </div>
     <div class="footer-col">
       <h4>Vehicles</h4>
@@ -328,30 +417,36 @@
       <a href="#">Kiira Motors</a>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
-      <a href="#">About Us</a>
-      <a href="#">Careers</a>
-      <a href="#">Investors</a>
-      <a href="#">Press</a>
-    </div>
-    <div class="footer-col">
-      <h4>Support</h4>
-      <a href="#">Track Order</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Returns</a>
-      <a href="#">FAQ</a>
-    </div>
+  <h4>Company</h4>
+  <a href="javascript:void(0)" onclick="openInfoSection('about')">About Us</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('careers')">Careers</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('investors')">Investors</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('press')">Press</a>
+</div>
+
+<div class="footer-col">
+  <h4>Support</h4>
+  <a href="javascript:void(0)" onclick="openInfoSection('track-order')">Track Order</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('contact')">Contact Us</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('returns')">Returns</a>
+  <a href="javascript:void(0)" onclick="openInfoSection('faq')">FAQ</a>
+</div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 NovaCartel. All rights reserved.</span>
     <div class="footer-locations">
-      <span>🇺🇬 Kampala</span>
-      <span>🇰🇪 Nairobi</span>
-      <span>🇷🇼 Kigali</span>
+      <span>Kampala</span>
+      <span>Nairobi</span>
+      <span>Kigali</span>
     </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<!-- JS bundles in dependency order -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
 </body>
 </html>

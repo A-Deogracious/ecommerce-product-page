@@ -1,72 +1,96 @@
-# 🚗 NovaCartel – East African Automotive E‑commerce
+# 🚗 NovaCartel – East African Automotive Marketplace
 
-An interactive, multi-currency ecommerce landing page for **NovaCartel**, a fictional automotive marketplace operating across **Kampala, Kigali, and Nairobi**. The page showcases a premium car showroom experience with a **hero slider, dynamic product grid, wishlist, cart, and local currency support**.
+NovaCartel is an interactive, multi‑currency ecommerce landing page for a fictional automotive marketplace operating across **Kampala, Nairobi, and Kigali**. It delivers a premium showroom experience with a hero slider, dynamic product grid, wishlist, cart, and support for local currencies.
+
+> Built as a front‑end UI/UX project using HTML, CSS, and vanilla JavaScript.
+
+---
 
 ## 🌍 Product Vision
 
-NovaCartel is designed as a front-end prototype for an **East African automotive marketplace**, focusing on high-end vehicles and related products. The goal is to simulate a real ecommerce engine that:
+NovaCartel explores what a modern **East African automotive and mobility platform** could look like.
 
-- Feels like a modern car dealership website.
-- Supports regional currencies (USD, UGX, KES) for East African buyers.
-- Demonstrates stateful user interactions (cart, wishlist, configuration) using only frontend technologies.
+The prototype focuses on:
 
-This project is a foundation for future integration with real payment APIs (e.g. mobile money) and a backend inventory system.
+- A clean, high‑end dealership experience for vehicles and lifestyle products.
+- Realistic regional pricing using USD, UGX, and KES.
+- Stateful interactions (cart, wishlist, configurator) implemented fully on the client side.
+
+This front‑end can later be extended with real payment APIs (mobile money, cards) and a backend for inventory, authentication, and order management. [web:76][web:79]
+
+---
 
 ## 🚀 Core Features
 
 - **Hero product carousel**  
-  Rotates between featured vehicles with background image, specs, and “Order” call‑to‑action.
+  Rotates between featured vehicles with imagery, key specs, and a primary “Order” call‑to‑action.
 
-- **Dynamic product rendering**  
-  Products (cars, energy products, merch) are defined in a JavaScript array and rendered into the grid at runtime.
+- **Dynamic product catalog**  
+  Vehicles, Kiira Motors buses, energy solutions, and merch are defined in a JavaScript data file and rendered into the grid at runtime.
 
-- **Multi-currency pricing**  
-  Toggle between USD, UGX, KES with on-the-fly price conversion via a central formatter function.
+- **Multi‑currency pricing**  
+  Toggle between **USD, UGX, and KES**, with conversion handled by a central formatter and shared rate table.
 
-- **Filter and sort system**  
-  Filter by brand and category, sort by price or name, and see the live results count.
+- **Filtering and sorting**  
+  Filter by brand and category, sort by price or name, and see a live products count as criteria change. [web:59][web:62]
 
-- **State-managed cart and wishlist**  
-  Add/remove items to cart and wishlist, persisted in localStorage so state survives page reloads.
+- **State‑managed cart and wishlist**  
+  Add/remove items, update quantities, and keep state in `localStorage` so the cart and wishlist survive page reloads.
 
-- **Product configurator (detail flow)**  
-  “Order” or hero CTA opens a configuration flow for the selected vehicle (quantity, options, color where applicable).
+- **Product configurator**  
+  “Order” opens a configuration flow for the selected vehicle, allowing customers to choose options, colours, and quantities before adding to cart.
 
 - **Responsive, premium UI**  
-  Mobile‑first layout, large hero, clean cards, consistent spacing and typography for a high-end automotive look.
+  Dark theme, automotive‑inspired typography, and a mobile‑first layout that scales from phones to desktop. [web:61][web:63]
+
+- **Company & Support sections**  
+  Footer links open dedicated content areas for About, Careers, Investors, Press, Track Order, Returns, FAQ, and Contact.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – Semantic structure for better accessibility and SEO.
-- **CSS3** – Custom layout and components using Flexbox/Grid and utility-style classes.
-- **Vanilla JavaScript (ES6)** – App state management, rendering logic, currency conversion, filters, cart, wishlist, hero slider.
-- **LocalStorage** – Persists cart, wishlist, currency and user session data on the client.
-- **Git & GitHub** – Version control, project history, and portfolio hosting.
+- **HTML5** – Semantic layout and structure.
+- **CSS3** – Custom styling using Flexbox/Grid, component classes, and responsive breakpoints.
+- **Vanilla JavaScript (ES6)** – Rendering logic, app state, currency conversion, filters, hero slider, cart, wishlist, and modals.
+- **Web Storage (localStorage)** – Persists cart, wishlist, currency selection, and basic session preferences.
+- **Git & GitHub** – Version control, collaboration, and hosting of the codebase. [web:71][web:75]
 
-## 💻 Running the Project
+---
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/A-Deogracious/ecommerce-product-page.git
-   cd ecommerce-product-page
-   ```
+## 💻 Getting Started
 
-2. **Open in a browser**
+### Clone the repository
 
-   - Easiest: double‑click `index.html`, or
-   - Use a simple dev server (recommended):
+```bash
+git clone https://github.com/A-Deogracious/ecommerce-product-page.git
+cd ecommerce-product-page
+```
 
-     ```bash
-     # with Node installed
-     npx live-server
-     ```
+### Run locally
 
-     Then open the provided local URL in your browser.
+You can open `index.html` directly in your browser, or use a simple dev server (recommended):
 
-The page will load with demo products, working hero slider, filters, multi‑currency pricing, cart, and wishlist.
+```bash
+# with Node installed
+npx live-server
+# or use the "Live Server" extension in VS Code
+```
 
-## 📈 Possible Future Enhancements
+Then open the local URL shown in the terminal (usually `http://127.0.0.1:5500/`).
 
-- Add backend API for inventory and orders (Node/Express or Django/DRF).
-- Implement user accounts and authentication.
-- Add basic analytics (most viewed vehicle, most added to cart, etc.).
+The landing page will load with demo products, working hero slider, filters, currency toggle, cart, wishlist, and footer info sections.
+
+---
+
+## 📈 Roadmap
+
+- Backend API for inventory, orders, and user accounts.
+- Real authentication and user profiles (saved configurations, order history).
+- Payment integration for card and mobile money (e.g. Flutterwave, MTN MoMo, M‑Pesa).
+- Analytics for most viewed vehicles, top brands, and conversion funnel.
+- Admin interface for managing products, brands, and pricing. [web:80]
+
+---
+
+This project was created as part of a 2026 UI/UX coursework assignment and is maintained as a learning and portfolio piece.
